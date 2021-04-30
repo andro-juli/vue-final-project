@@ -1,17 +1,18 @@
 <template>
-  <div class="home">
+  <div class="science">
     <Hero />
   </div>
 </template>
 
 <script>
 import Hero from "@/components/Hero.vue";
+
 export default {
-  name: "Home",
+  name: "Bus",
   components: {
     Hero,
   },
 };
 </script>
 
-<style scoped></style>
+<style></style>
