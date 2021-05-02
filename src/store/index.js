@@ -12,35 +12,26 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
   state: {
     AllNews: [],
-    // BusinessNews:[],
-    // EnterNews:[],
-    // GeneralNews:[],
-    // HealthNews:[],
-    // ScienceNews:[],
-    // SportsNews:[],
-    // TechNews:[]
-    
+    loading: false
   },
   
    getters:{
     getAllNews: state => state.AllNews,
-    
-    
+    getLoading: state => state.loading
  },
 
   mutations: {
     setAllNews: (state, payload) => { state.AllNews = payload},
-    
+    setLoading: (state, payload) => { state.loading = payload}
   },
   actions: {
     fetchAllNews: ({commit}, payload) => {
       const {
         category =''
       } = payload;
-      
-      
       try {
-        axios.get(`https://newsapi.org/v2/top-headlines?country=ng&category=${category}&apiKey=9266f68a762347a5a81f4df9c6b808ca`)
+        commit ('setLoading', true)
+        axios.get(`https://newsapi.org/v2/top-headlines?country=ng&category=${category}&apiKey=f0cb41e5d7a4440e843f8a439f968f69`)
         .then((res) => {
           console.log(res.data.articles);
           commit('setAllNews', res.data.articles);

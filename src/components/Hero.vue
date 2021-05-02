@@ -1,6 +1,6 @@
 <template>
   <div class="hero">
-    <div v-if="getAllNews && getAllNews.length != 0" class="container">
+    <div class="container">
       <div v-for="(getAllNew, index) in getAllNews" :key="index" class="cards">
         <p class="source">{{ getAllNew.source.name }}</p>
         <h3 class="title">{{ getAllNew.title }}</h3>
@@ -15,9 +15,6 @@
           <button type="button" class="but">Read more</button>
         </a>
       </div>
-    </div>
-    <div v-else>
-      Please wait while your page loads...
     </div>
   </div>
 </template>
@@ -36,7 +33,7 @@ export default {
     this.fetchAllNews({ category });
   },
   computed: {
-    ...mapGetters(["getAllNews"]),
+    ...mapGetters(["getAllNews", "getLoading"]),
   },
   methods: {
     ...mapActions(["fetchAllNews"]),
@@ -67,9 +64,10 @@ export default {
   font-weight: bold;
 }
 .cards {
-  width: 100%;
+  max-width: 80%;
   margin-top: 20px;
   padding: 20px;
+  margin: auto;
 }
 .source {
   color: #050505;
@@ -87,5 +85,17 @@ export default {
   height: 40px;
   border-radius: 5px;
   margin: 5px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+.cards {
+  max-width: 100%;
+}
+.but {
+  width: 50%;
 }
 </style>
